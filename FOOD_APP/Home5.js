@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Image, TouchableOpacity , Text} from "react-native";
+import { View, Image, TouchableOpacity , Text } from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import navigation
 
 const Home5 = () => {
@@ -16,7 +16,7 @@ const Home5 = () => {
             }}>
                 <Image
                     source={require('./img/hamburger 1.png')}
-                    tyle={{width: 300, height: 300, borderWidth: 1, borderRadius: 20}}
+                    style={{width: 300, height: 300, borderWidth: 1, borderRadius: 20}}
                 />
             </View>
 
@@ -30,18 +30,18 @@ const Home5 = () => {
                 style={{
                     backgroundColor:'#D35400',
                     borderRadius:30,
-                    width:354,
                     height:50,
+                    width:354,
                     alignItems:'center',
                     justifyContent:'center',
+                    marginHorizontal: 20, // Sử dụng marginHorizontal để tạo khoảng cách hai bên
                 }}>
                     <Text style={{
                         fontSize:18,
-                        fontWeight:700,
+                        fontWeight:'700',
                         color:'white',
                         width:61,
                         height:27,
-
                     }}>Sign In</Text>
                 </TouchableOpacity>
             </View>
@@ -59,10 +59,11 @@ const Home5 = () => {
                     height:50,
                     alignItems:'center',
                     justifyContent:'center',
+                    marginHorizontal: 50, // Sử dụng marginHorizontal để tạo khoảng cách hai bên
                 }}>
                     <Text style={{
                         fontSize:18,
-                        fontWeight:700,
+                        fontWeight:'700',
                         color:'#000000',
                         width:68,
                         height:27,
@@ -70,26 +71,27 @@ const Home5 = () => {
                     }}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
-            
-            {/* Or connect with */}
+                        {/* Or connect with */}
             <View style={{
                 flexDirection:'row',
                 justifyContent:'space-between',
                 alignItems:'center',
                 bottom:30,
-            }}>
-            <Text style={{left:1}}>____________________________________________</Text>
-            <Text style={{
-                right:10,
-                fontSize:14,
-                fontWeight:400,
-                }}>Or connect with</Text>
+                }}>
+                <Text style={{left:1, color:'#34495E4D'}}>__________________________________________</Text>
+                <Text style={{
+                    right:35,
+                    fontSize:14,
+                    fontWeight:'400',
+                    top:5,
+                    color:'#34495E'
+                    }}>Or connect with
+                </Text>
             </View>
-
             <View style={{
                 flexDirection:'row',
                 justifyContent:'space-between',
-            }}>
+                }}>
                 <View>
                     <Image
                         source={require('./img/PngItem_39514 1.png')}
@@ -103,14 +105,14 @@ const Home5 = () => {
                     <View>
                         <Image
                             source={require('./img/facebook 1.png')}
-                            style={{width: 40, height: 40, right: 30}}
+                            style={{width: 40, height: 40, right: 50}}
                         />
                     </View>
 
                     <View>
                         <Image
                             source={require('./img/google-plus 1.png')}
-                            style={{width: 40, height: 40,right:10}}
+                            style={{width: 40, height: 40,right:30}}
                         />
                     </View>
                 </View>
