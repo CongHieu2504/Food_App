@@ -7,6 +7,8 @@ import Home3 from "./Home3";
 import Home4 from "./Home4";
 import Home5 from "./Home5";
 import Home6 from "./Home6";
+import Home7 from "./Home7";  
+
 
 const Stack = createNativeStackNavigator();
 
@@ -20,6 +22,7 @@ export default function YourApp () {
         <Stack.Screen name="Home4" component={Home4}/>
         <Stack.Screen name="Home5" component={Home5}/>
         <Stack.Screen name="Home6" component={Home6}/>
+        <Stack.Screen name="Home7" component={Home7}/>
       </Stack.Navigator>
     </NavigationContainer>
   )

@@ -2,8 +2,7 @@ import React from "react";
 import { View, Image, TouchableOpacity , Text} from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import navigation
 
-const Home6 = () => {
-    const navigation = useNavigation(); // Khởi tạo navigation
+const Home7 = () => {
     return(
         <View style={{flex:2}}>
             <View style={{
@@ -74,9 +73,7 @@ const Home6 = () => {
                 justifyContent:'center',
                 bottom:100,
             }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home7')}
-                 style={{ 
-
+                <TouchableOpacity style={{
                     backgroundColor:'#D35400',
                     width:354,
                     height:50,
@@ -156,4 +153,4 @@ const Home6 = () => {
     )
 };
 
-export default Home6;
+export default Home7;
