@@ -13,17 +13,18 @@ const Home6 = () => {
                 width:83,
                 height:36,
                 left:30,
-                bottom:30,
+                marginTop: 100,
             }}>
                 <Text style={{fontSize:24, fontWeight:700}}>Sign In</Text>
             </View>
 
+            {/* UserName */}
             <View style={{
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:150,
+                marginBottom:20, // Có thể thay đổi giá trị nếu cần tinh chỉnh thêm
             }}>
-                <TouchableOpacity style={{
+                <View style={{
                     backgroundColor:'#ECF0F1',
                     width:354,
                     height:50,
@@ -40,15 +41,16 @@ const Home6 = () => {
                         textAlign: "left",
                         width: '100%',
                     }}>Username</Text>
-                </TouchableOpacity>
+                </View>
             </View>
 
+            {/* Password */}
             <View style={{
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:130,
+                marginBottom:30,
             }}>
-                <TouchableOpacity style={{
+                <View style={{
                     backgroundColor:'#ECF0F1',
                     width:354,
                     height:50,
@@ -65,16 +67,15 @@ const Home6 = () => {
                         textAlign: "left",
                         width: '100%',
                     }}>Password</Text>
-                </TouchableOpacity>
+                </View>
             </View>
-
 
             <View style={{
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:100,
+                marginBottom:20,
             }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home7')}
+                <TouchableOpacity onPress={() => navigation.navigate('Home8')}
                  style={{ 
 
                     backgroundColor:'#D35400',
@@ -96,7 +97,7 @@ const Home6 = () => {
             <View style={{
                 alignItems: 'flex-end',
                 justifyContent: 'center',
-                bottom: 80,
+                marginBottom:30,
                 paddingRight: 30,
             }}>
                 <Text style={{
@@ -111,7 +112,7 @@ const Home6 = () => {
                 flexDirection:'row',
                 justifyContent:'space-between',
                 alignItems:'center',
-                bottom:30,
+                marginBottom:30,
                 }}>
                 <Text style={{left:1, color:'#34495E4D'}}>__________________________________________</Text>
                 <Text style={{
@@ -123,6 +124,7 @@ const Home6 = () => {
                     }}>Or connect with
                 </Text>
             </View>
+
             <View style={{
                 flexDirection:'row',
                 justifyContent:'space-between',

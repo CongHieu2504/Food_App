@@ -12,7 +12,7 @@ const Home5 = () => {
                 flex:1,
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:30,
+                marginTop: 80,
             }}>
                 <Image
                     source={require('./img/hamburger 1.png')}
@@ -24,7 +24,7 @@ const Home5 = () => {
             <View style={{
                 justifyContent:'center',
                 alignItems:'center',
-                bottom:50,
+                marginBottom:20, // Sử dụng marginBottom để điều chỉnh khoảng cách
             }}>
                 <TouchableOpacity onPress={() => navigation.navigate('Home6')}
                 style={{
@@ -35,6 +35,7 @@ const Home5 = () => {
                     alignItems:'center',
                     justifyContent:'center',
                     marginHorizontal: 20, // Sử dụng marginHorizontal để tạo khoảng cách hai bên
+                    marginTop:80,
                 }}>
                     <Text style={{
                         fontSize:18,
@@ -50,9 +51,10 @@ const Home5 = () => {
             <View style={{
                 justifyContent:'center',
                 alignItems:'center',
-                bottom:30,
+                marginBottom:20, // Sử dụng marginBottom để điều chỉnh khoảng cách
             }}>
-                <TouchableOpacity style={{
+                <TouchableOpacity onPress={ () => navigation.navigate('Home7')}
+                style={{
                     backgroundColor:'#ECF0F1',
                     borderRadius:30,
                     width:354,
@@ -71,12 +73,13 @@ const Home5 = () => {
                     }}>Sign Up</Text>
                 </TouchableOpacity>
             </View>
-                        {/* Or connect with */}
+
+            {/* Or connect with */}
             <View style={{
                 flexDirection:'row',
                 justifyContent:'space-between',
                 alignItems:'center',
-                bottom:30,
+                marginBottom:20, // Sử dụng marginBottom để điều chỉnh khoảng cách
                 }}>
                 <Text style={{left:1, color:'#34495E4D'}}>__________________________________________</Text>
                 <Text style={{
@@ -88,6 +91,7 @@ const Home5 = () => {
                     }}>Or connect with
                 </Text>
             </View>
+
             <View style={{
                 flexDirection:'row',
                 justifyContent:'space-between',

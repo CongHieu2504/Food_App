@@ -3,26 +3,29 @@ import { View, Image, TouchableOpacity , Text} from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import navigation
 
 const Home7 = () => {
+
+    const navigation = useNavigation(); // Khởi tạo navigation
     return(
         <View style={{flex:2}}>
             <View style={{
                 flex:1,
                 alignItems:'center',
                 justifyContent:'center',
-                width:83,
+                width:93,
                 height:36,
                 left:30,
-                bottom:30,
+                marginTop:60,
             }}>
-                <Text style={{fontSize:24, fontWeight:700}}>Sign In</Text>
+                <Text style={{fontSize:24, fontWeight:700, lineHeight:36}}>Sign Up</Text>
             </View>
 
+            {/* Username */}
             <View style={{
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:150,
+                marginBottom:20,
             }}>
-                <TouchableOpacity style={{
+                <View style={{
                     backgroundColor:'#ECF0F1',
                     width:354,
                     height:50,
@@ -38,16 +41,17 @@ const Home7 = () => {
                         paddingLeft: 20,
                         textAlign: "left",
                         width: '100%',
-                    }}>Username</Text>
-                </TouchableOpacity>
+                    }}>Enter Username</Text>
+                </View>
             </View>
 
+            {/* PassWord */}
             <View style={{
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:130,
+                marginBottom:20, // Thay bottom bằng marginBottom để điều chỉnh khoảng cách
             }}>
-                <TouchableOpacity style={{
+                <View style={{
                     backgroundColor:'#ECF0F1',
                     width:354,
                     height:50,
@@ -64,16 +68,43 @@ const Home7 = () => {
                         textAlign: "left",
                         width: '100%',
                     }}>Password</Text>
-                </TouchableOpacity>
+                </View>
             </View>
 
-
+            {/* Re-enter Password */}
             <View style={{
                 alignItems:'center',
                 justifyContent:'center',
-                bottom:100,
+                marginBottom:20, // Thay bottom bằng marginBottom để điều chỉnh khoảng cách
             }}>
-                <TouchableOpacity style={{
+                <View style={{
+                    backgroundColor:'#ECF0F1',
+                    width:354,
+                    height:50,
+                    marginHorizontal:20,
+                    borderRadius:30,
+                    alignItems: "center", 
+                    justifyContent: "center", 
+                }}>
+                    <Text style={{
+                        fontSize:14,
+                        fontWeight:'400',
+                        color:'#00000080',
+                        paddingLeft: 20,
+                        textAlign: "left",
+                        width: '100%',
+                    }}>Re-enter Password</Text>
+                </View>
+            </View>
+
+            {/* Sign In */}
+            <View style={{
+                alignItems:'center',
+                justifyContent:'center',
+                marginBottom:20, // Thay bottom bằng marginBottom để điều chỉnh khoảng cách
+            }}>
+                <TouchableOpacity onPress={() => navigation.navigate('Home8')}
+                style={{
                     backgroundColor:'#D35400',
                     width:354,
                     height:50,
@@ -93,7 +124,7 @@ const Home7 = () => {
             <View style={{
                 alignItems: 'flex-end',
                 justifyContent: 'center',
-                bottom: 80,
+                marginBottom:30, // Thay bottom bằng marginBottom để điều chỉnh khoảng cách
                 paddingRight: 30,
             }}>
                 <Text style={{
@@ -108,7 +139,7 @@ const Home7 = () => {
                 flexDirection:'row',
                 justifyContent:'space-between',
                 alignItems:'center',
-                bottom:30,
+                marginBottom:30, // Thay bottom bằng marginBottom để điều chỉnh khoảng cách
                 }}>
                 <Text style={{left:1, color:'#34495E4D'}}>__________________________________________</Text>
                 <Text style={{
@@ -120,6 +151,7 @@ const Home7 = () => {
                     }}>Or connect with
                 </Text>
             </View>
+
             <View style={{
                 flexDirection:'row',
                 justifyContent:'space-between',
