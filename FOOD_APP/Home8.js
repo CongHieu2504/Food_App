@@ -26,7 +26,7 @@ const Home8 = () => {
     };
 
     return (
-        <View style={{ flex: 1 }}>
+        <View style={{ flex: 1 ,backgroundColor:'#FFFFFF'}}>
             <ScrollView>
                 <View style={{ paddingTop: 20 }}>
                     {/* Search Bar */}

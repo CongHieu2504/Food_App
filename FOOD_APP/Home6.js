@@ -5,7 +5,7 @@ import { useNavigation } from '@react-navigation/native'; // Import navigation
 const Home6 = () => {
     const navigation = useNavigation(); // Khởi tạo navigation
     return(
-        <View style={{flex:2}}>
+        <View style={{flex:2,backgroundColor:'#FFFFFF'}}>
             <View style={{
                 flex:1,
                 alignItems:'center',
