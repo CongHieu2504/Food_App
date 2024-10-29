@@ -1,9 +1,28 @@
-import React from "react";
-import { View, Image, TouchableOpacity , Text} from "react-native";
+import { View, Image, TouchableOpacity , Text, TextInput} from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import navigation
+import React, {useState, useRoute} from "react"; // Thêm useState vào đây
 
 const Home6 = () => {
     const navigation = useNavigation(); // Khởi tạo navigation
+    const [userName, setUserName] = useState(''); // Khởi tạo userName
+    const [password, setPassword] = useState(''); // Khởi tạo password
+    //Tạo 1 mảng để nhập UserName , Password
+    const users = [
+        {userName : 'admin', password:'admin'},
+    ]
+
+    const handleLogin = () => {
+        const user = users.find((u) => u.userName === userName && u.password === password);
+        if(user)
+        {
+            navigation.navigate('Home8');
+        }
+        else
+        {
+            alert('Sai thông tin đăng nhập');
+        }
+    }
+
     return(
         <View style={{flex:2,backgroundColor:'#FFFFFF'}}>
             <View style={{
@@ -33,14 +52,18 @@ const Home6 = () => {
                     alignItems: "center", 
                     justifyContent: "center", 
                 }}>
-                    <Text style={{
+                    <TextInput style={{
                         fontSize:14,
                         fontWeight:'400',
-                        color:'#00000080',
                         paddingLeft: 20,
                         textAlign: "left",
                         width: '100%',
-                    }}>Username</Text>
+                    }}
+                        placeholder="UserName"
+                        placeholderTextColor="00000080"
+                        value={userName}
+                        onChangeText={setUserName}
+                    />
                 </View>
             </View>
 
@@ -59,14 +82,18 @@ const Home6 = () => {
                     alignItems: "center", 
                     justifyContent: "center", 
                 }}>
-                    <Text style={{
+                    <TextInput style={{
                         fontSize:14,
                         fontWeight:'400',
-                        color:'#00000080',
                         paddingLeft: 20,
                         textAlign: "left",
                         width: '100%',
-                    }}>Password</Text>
+                    }}
+                        placeholder="Password"
+                        placeholderTextColor="00000080"
+                        value={password}
+                        onChangeText={setPassword}
+                    />
                 </View>
             </View>
 
@@ -75,7 +102,7 @@ const Home6 = () => {
                 justifyContent:'center',
                 marginBottom:20,
             }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home8')}
+                <TouchableOpacity onPress={handleLogin}
                  style={{ 
 
                     backgroundColor:'#D35400',

@@ -1,301 +1,310 @@
-import React, { useState } from "react"; // Thêm useState vào đây
+import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Image, TouchableOpacity, Text, ScrollView } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the icon library
+import { View, Image, TouchableOpacity, Text, TextInput, FlatList } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Home8 = () => {
-
-    //Khởi tạo chọn màu
-    const [selectedImage, setSelectedImage] = useState(null);
-    const navigation = useNavigation();
-
-    //Bấm vào chọn màu muốn chuyển sang
-    const handleNextPage = () => {
-        if (selectedImage === 'Drink') {
-            navigation.navigate('Home9', { image: selectedImage });
-        }
-        else if (selectedImage === 'Food') {
-            navigation.navigate('Home9', { image: selectedImage });
-        }
-        else if (selectedImage === 'Cake') {
-            navigation.navigate('Home9', { image: selectedImage });
-        }
-        else if (selectedImage === 'Snack') {
-            navigation.navigate('Home9', { image: selectedImage });
+    const [data, setData] = useState([]);
+    const [loading, setLoading] = useState(true);
+    const [selectedCategory, setSelectedCategory] = useState(null);
+    // API call
+    const fetchData = async () => {
+        try {
+            const response = await fetch("https://6459feb465bd868e930d904a.mockapi.io/users");
+            const json = await response.json();
+            setData(json);
+            setLoading(false);
+        } catch (error) {
+            console.error(error);
+            setLoading(false);
         }
     };
 
-    return (
-        <View style={{ flex: 1 ,backgroundColor:'#FFFFFF'}}>
-            <ScrollView>
-                <View style={{ paddingTop: 20 }}>
-                    {/* Search Bar */}
-                    <View style={{ marginBottom: 20 }}>
-                        <TouchableOpacity style={{
-                            width: 354,
-                            height: 50,
-                            borderRadius: 30,
-                            marginHorizontal: 20,
-                            backgroundColor: '#ECF0F1',
-                            justifyContent: 'flex-start',
-                            alignItems: 'center',
-                            flexDirection: 'row',
-                            paddingHorizontal: 20,
-                        }}>
-                            <Icon name="search" size={20} color="#00000080" />
-                            <Text style={{
-                                fontSize: 14,
-                                fontWeight: '400',
-                                width: '100%',
-                                paddingLeft: 20,
-                                color: '#00000080',
-                            }}>Search</Text>
-                        </TouchableOpacity>
-                    </View>
+    useEffect(() => {
+        fetchData();
+    }, []);
 
-                    {/* Location */}
-                    <View style={{
-                        flexDirection: 'row',
-                        alignItems: 'center',
-                        paddingHorizontal: 20,
-                        marginBottom: 20,
-                    }}>
-                        <Icon name="map-marker" size={30} color={"#000000"} />
-                        <Text style={{
-                            marginLeft: 20,
-                            fontSize: 14,
-                            fontWeight: '400',
-                            color: '#000000',
-                        }}>9 West 46 Th Street, New York City</Text>
-                    </View>
-
-                    {/* 4 Hình ảnh */}
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        marginBottom: 20,
-                    }}>
-                        {/* DRINK */}
-                        <TouchableOpacity onPress={() => setSelectedImage('Drink')}>
-                            <Image
-                                source={require('./img/cup.png')}
-                                style={{
-                                    width: 70,
-                                    height: 70,
-                                    borderRadius: 20,
-                                    backgroundColor: '#ECF0F1',
-                                    borderWidth: selectedImage === 'Drink' ? 3 : 0,
-                                    borderColor: selectedImage === 'Drink' ? '#D35400' : 'transparent',
-                                }}
-                            />
-                            <Text style={{
-                                width: 50,
-                                height: 16,
-                                fontSize: 14,
-                                lineHeight: 17,
-                                fontWeight: '400',
-                                marginTop: 5,
-                                marginLeft: 18,
-                            }}>
-                                Drink
-                            </Text>
-                        </TouchableOpacity>
+// Hàm xử lý khi nhấn "Order"
+const handleOrder = () => {
+    if (selectedImage) {  // Thay selectedCategory bằng selectedImage
+        navigation.navigate('Home9', { category: selectedImage });
+    } else {
+        alert("Please select a category before ordering!");  // Thông báo nếu chưa chọn danh mục
+    }
+};
 
 
-                        {/* FOOD */}
-                        <TouchableOpacity onPress={() => setSelectedImage('Food')}>
-                            <Image
-                                source={require('./img/ham_1.png')}
-                                style={{
-                                    width: 70,
-                                    height: 70,
-                                    borderRadius: 20,
-                                    backgroundColor: '#ECF0F1',
-                                    borderWidth: selectedImage === 'Food' ? 3 : 0,
-                                    borderColor: selectedImage === 'Food' ? '#D35400' : 'transparent'
-                                }}
-                            />
-                            <Text style={{
-                                width: 50,
-                                height: 16,
-                                fontSize: 14,
-                                lineHeight: 17,
-                                fontWeight: '400',
-                                marginTop: 5,
-                                marginLeft: 18,
-                            }}>
-                                Food
-                            </Text>
-                        </TouchableOpacity>
-
-
-                        {/* CAKE */}
-                        <TouchableOpacity onPress={() => setSelectedImage('Cake')}>
-                            <Image
-                                source={require('./img/Cake_.png')}
-                                style={{
-                                    width: 70,
-                                    height: 70,
-                                    borderRadius: 20,
-                                    borderWidth: selectedImage === 'Cake' ? 3 : 0,
-                                    borderColor: selectedImage === 'Cake' ? '#D35400' : 'transparent'
-                                }}
-                            />
-                            <Text style={{
-                                width: 50,
-                                height: 16,
-                                fontSize: 14,
-                                lineHeight: 17,
-                                fontWeight: '400',
-                                marginTop: 5,
-                                marginLeft: 18,
-                            }}>
-                                Cake
-                            </Text>
-                        </TouchableOpacity>
-
-
-                        {/* SNACK */}
-                        <TouchableOpacity onPress={() => setSelectedImage('Snack')}>
-                            <Image
-                                source={require('./img/Snack_.png')}
-                                style={{
-                                    width: 70,
-                                    height: 70,
-                                    borderRadius: 20,
-                                    borderWidth: selectedImage === 'Snack' ? 3 : 0,
-                                    borderColor: selectedImage === 'Snack' ? '#D35400' : 'transparent'
-                                }}
-                            />
-                            <Text style={{
-                                width: 50,
-                                height: 16,
-                                fontSize: 14,
-                                lineHeight: 17,
-                                fontWeight: '400',
-                                marginTop: 5,
-                                marginLeft: 18,
-                            }}>
-                                Snack
-                            </Text>
-                        </TouchableOpacity>
-
-                    </View>
-
-                    {/* Food Menu and View All */}
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        paddingHorizontal: 40,
-                        marginBottom: 20,  // Adjusted marginBottom for spacing
-                    }}>
-                        <Text style={{
-                            fontSize: 18,
-                            fontWeight: '700',
-                            lineHeight: 27,
-                        }}>Food Menu</Text>
-                        <Text style={{
-                            fontSize: 12,
-                            fontWeight: '400',
-                        }}>View all</Text>
-                    </View>
-
-                    {/* Additional Images - Group 2, 3, 4 */}
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        paddingHorizontal: 20,
-                        marginBottom: 20,
-                    }}>
+    const renderItem = ({ item }) => {
+        return (
+            <View>
+                <View style={{ flexDirection: 'row', marginBottom: 10, alignItems: 'center' }}>
+                    <View style={{flexDirection:'row', alignItems:'center'}}>
                         <Image
                             source={require('./img/Group 2.png')}
-                            style={{ width: 100, height: 100 }}
+                            style={{ width: 50, height: 50, marginRight: 10 }}
                         />
+                        <Text>Hambuger</Text>
+                    </View>
+                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:10,}}>
                         <Image
                             source={require('./img/Group 3.png')}
-                            style={{ width: 100, height: 100 }}
+                            style={{ width: 50, height: 50, marginRight: 10 }}
                         />
+                        <Text>Pizza</Text>
+                    </View>
+                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:20}}>
                         <Image
                             source={require('./img/Group 4.png')}
-                            style={{ width: 100, height: 100 }}
+                            style={{ width: 50, height: 50, marginRight: 10 }}
                         />
-                    </View>
-
-                    {/* Additional Images - Group 5, 6, 7 */}
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        paddingHorizontal: 20,
-                        marginBottom: 20,
-                    }}>
-                        <Image
-                            source={require('./img/Group 5.png')}
-                            style={{ width: 100, height: 100 }}
-                        />
-                        <Image
-                            source={require('./img/Group 6.png')}
-                            style={{ width: 100, height: 100 }}
-                        />
-                        <Image
-                            source={require('./img/Group 7.png')}
-                            style={{ width: 100, height: 100 }}
-                        />
-                    </View>
-
-                    {/* Near Me and View All */}
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-between',
-                        alignItems: 'center',
-                        paddingHorizontal: 40,
-                        marginBottom: 20,
-                    }}>
-                        <Text style={{
-                            fontSize: 18,
-                            fontWeight: '700',
-                            lineHeight: 27,
-                        }}>Near Me</Text>
-                        <Text style={{
-                            fontSize: 12,
-                            fontWeight: '400',
-                        }}>View all</Text>
-                    </View>
-
-                    {/* Restaurant Info */}
-                    <View style={{
-                        flexDirection: 'row',
-                        justifyContent: 'space-around',
-                        paddingHorizontal: 10,
-                        alignItems: 'center',
-                        marginBottom: 20, // Adjust margin for proper spacing
-                    }}>
-                        <Image
-                            source={require('./img/Rectangle 6.png')}
-                            style={{ marginRight: 10, width: 80, height: 80 }}
-                        />
-                        <View style={{ right: 30 }}>
-                            <Text style={{ fontWeight: '700', fontSize: 16 }}>Dapur Ijah Restaurant</Text>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-                                <Icon name="map-marker" size={12} color={"#000000"} />
-                                <Text style={{ marginLeft: 5, fontSize: 12 }}>13 th Street, 46 W 12th St, NY</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
-                                <Icon name="clock-o" size={12} color={"#34495E"} />
-                                <Text style={{ marginLeft: 5, fontSize: 12 }}>3 min - 1.1 km</Text>
-                            </View>
-                            <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                                <Icon name="star" size={12} color={"#FFD700"} />
-                                <Text style={{ marginLeft: 5, fontSize: 12 }}>4.5 (200 reviews)</Text>
-                            </View>
-                        </View>
-                    </View>
-
-                    {/* Fake content to demonstrate scrolling */}
-                    <View style={{ height: 20 }}>
+                        <Text>BBQ</Text>
                     </View>
                 </View>
-            </ScrollView>
+                <View style={{ flexDirection: 'row', marginBottom: 10, alignItems: 'center'}}>
+                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                        <Image
+                            source={require('./img/Group 5.png')}
+                            style={{ width: 50, height: 50, marginRight: 10 }}
+                        />
+                        <Text>Fruit</Text>
+                    </View>
+                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:50,}}>
+                        <Image
+                            source={require('./img/Group 6.png')}
+                            style={{ width: 50, height: 50, marginRight: 10 }}
+                        />
+                        <Text>Sushi</Text>
+                    </View>
+                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:15,}}>
+                        <Image
+                            source={require('./img/Group 7.png')}
+                            style={{ width: 50, height: 50, marginRight: 10 }}
+                        />
+                        <Text>Noodle</Text>
+                    </View>
+                </View>
+            </View>
+        );
+    };
+
+    const [selectedImage, setSelectedImage] = useState(null);
+    const navigation = useNavigation();
+
+    // Header của FlatList
+    const renderHeader = () => (
+        <View>
+            {/* Search Bar */}
+            <View style={{ paddingTop: 20, marginBottom: 20 }}>
+                <TouchableOpacity style={{
+                    width: 354,
+                    height: 50,
+                    borderRadius: 30,
+                    marginHorizontal: 20,
+                    backgroundColor: '#ECF0F1',
+                    justifyContent: 'flex-start',
+                    alignItems: 'center',
+                    flexDirection: 'row',
+                    paddingHorizontal: 20,
+                }}>
+                    <Icon name="search" size={20} color="#00000080" />
+                    <TextInput style={{
+                        fontSize: 14,
+                        fontWeight: '400',
+                        width: '100%',
+                        paddingLeft: 20,
+                    }}
+                        placeholder="Search"
+                        placeholderTextColor="#00000080"
+                    />
+                </TouchableOpacity>
+            </View>
+
+            {/* Location */}
+            <View style={{
+                flexDirection: 'row',
+                alignItems: 'center',
+                paddingHorizontal: 20,
+                marginBottom: 20,
+            }}>
+                <Icon name="map-marker" size={30} color={"#000000"} />
+                <Text style={{
+                    marginLeft: 20,
+                    fontSize: 14,
+                    fontWeight: '400',
+                    color: '#000000',
+                }}>9 West 46 Th Street, New York City</Text>
+            </View>
+
+            {/* 4 Hình ảnh */}
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-around',
+                marginBottom: 20,
+            }}>
+                {/* DRINK */}
+                <TouchableOpacity onPress={() => setSelectedImage('Drink')}>
+                    <Image
+                        source={require('./img/cup.png')}
+                        style={{
+                            width: 70,
+                            height: 70,
+                            borderRadius: 20,
+                            backgroundColor: '#ECF0F1',
+                            borderWidth: selectedImage === 'Drink' ? 3 : 0,  // Hiển thị viền nếu được chọn
+                            borderColor: selectedImage === 'Drink' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                        }}
+                    />
+                    <Text style={{
+                        width: 50,
+                        height: 16,
+                        fontSize: 14,
+                        lineHeight: 17,
+                        fontWeight: '400',
+                        marginTop: 5,
+                        marginLeft: 18,
+                    }}>
+                        Drink
+                    </Text>
+                </TouchableOpacity>
+
+                {/* FOOD */}
+                <TouchableOpacity onPress={() => setSelectedImage('Food')}>
+                    <Image
+                        source={require('./img/ham_1.png')}
+                        style={{
+                            width: 70,
+                            height: 70,
+                            borderRadius: 20,
+                            backgroundColor: '#ECF0F1',
+                            borderWidth: selectedImage === 'Food' ? 3 : 0,  // Hiển thị viền nếu được chọn
+                            borderColor: selectedImage === 'Food' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                        }}
+                    />
+                    <Text style={{
+                        width: 50,
+                        height: 16,
+                        fontSize: 14,
+                        lineHeight: 17,
+                        fontWeight: '400',
+                        marginTop: 5,
+                        marginLeft: 18,
+                    }}>
+                        Food
+                    </Text>
+                </TouchableOpacity>
+
+                {/* CAKE */}
+                <TouchableOpacity onPress={() => setSelectedImage('Cake')}>
+                    <Image
+                        source={require('./img/Cake_.png')}
+                        style={{
+                            width: 70,
+                            height: 70,
+                            borderRadius: 20,
+                            borderWidth: selectedImage === 'Cake' ? 3 : 0,  // Hiển thị viền nếu được chọn
+                            borderColor: selectedImage === 'Cake' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                        }}
+                    />
+                    <Text style={{
+                        width: 50,
+                        height: 16,
+                        fontSize: 14,
+                        lineHeight: 17,
+                        fontWeight: '400',
+                        marginTop: 5,
+                        marginLeft: 18,
+                    }}>
+                        Cake
+                    </Text>
+                </TouchableOpacity>
+
+                {/* SNACK */}
+                <TouchableOpacity onPress={() => setSelectedImage('Snack')}>
+                    <Image
+                        source={require('./img/Snack_.png')}
+                        style={{
+                            width: 70,
+                            height: 70,
+                            borderRadius: 20,
+                            borderWidth: selectedImage === 'Snack' ? 3 : 0,  // Hiển thị viền nếu được chọn
+                            borderColor: selectedImage === 'Snack' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                        }}
+                    />
+                    <Text style={{
+                        width: 50,
+                        height: 16,
+                        fontSize: 14,
+                        lineHeight: 17,
+                        fontWeight: '400',
+                        marginTop: 5,
+                        marginLeft: 18,
+                    }}>
+                        Snack
+                    </Text>
+                </TouchableOpacity>
+            </View>
+        </View>
+    );
+
+    return (
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor: '#FFFFFF' }}>
+            {loading ? (
+                <Text style={{ textAlign: 'center', marginTop: 20 }}>Loading ...</Text>
+            ) : (
+                <FlatList
+                    data={data}
+                    renderItem={renderItem}
+                    keyExtractor={(item) => item.id.toString()}
+                    ListHeaderComponent={renderHeader} // Đặt phần đầu
+                    contentContainerStyle={{ alignItems: 'center', justifyContent: 'space-between' }} // Căn giữa danh sách
+                />
+            )}
+
+            {/* Near Me and View All */}
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                alignItems: 'center',
+                width: '90%',
+            }}>
+                <Text style={{
+                    fontSize: 18,
+                    fontWeight: '700',
+                    lineHeight: 27,
+                }}>Near Me</Text>
+                <Text style={{
+                    fontSize: 12,
+                    fontWeight: '400',
+                }}>View all</Text>
+            </View>
+
+            {/* Restaurant Info */}
+            <View style={{
+                flexDirection: 'row',
+                justifyContent: 'space-between',
+                width: '90%',
+                alignItems: 'center',
+                marginBottom: 20, // Adjust margin for proper spacing
+            }}>
+                <Image source={require('./img/Rectangle 6.png')}
+                    style={{ marginRight: 10, width: 80, height: 80 }}
+                />
+                <View style={{ right: 30 }}>
+                    <Text style={{ fontWeight: '700', fontSize: 16 }}>Dapur Ijah Restaurant</Text>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+                        <Icon name="map-marker" size={12} color={"#000000"} />
+                        <Text style={{ marginLeft: 5, fontSize: 12 }}>13 th Street, 46 W 12th St, NY</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginBottom: 5 }}>
+                        <Icon name="clock-o" size={12} color={"#34495E"} />
+                        <Text style={{ marginLeft: 5, fontSize: 12 }}>3 min - 1.1 km</Text>
+                    </View>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
+                        <Icon name="star" size={12} color={"#FFD700"} />
+                        <Text style={{ marginLeft: 5, fontSize: 12 }}>4.5 (200 reviews)</Text>
+                    </View>
+                </View>
+            </View>
 
             {/* Bottom Navigation */}
             <View style={{
@@ -305,13 +314,14 @@ const Home8 = () => {
                 borderTopWidth: 1,
                 borderColor: '#e0e0e0',
                 backgroundColor: '#ffffff',
+                width: '90%',
             }}>
-                <TouchableOpacity style={{ alignItems: 'center' }}>
+                <TouchableOpacity onPress={() => navigation.navigate('Home8')}
+                    style={{ alignItems: 'center' }}>
                     <Icon name="home" size={24} color="#000000" />
                     <Text style={{ fontSize: 12 }}>Home</Text>
                 </TouchableOpacity>
-                <TouchableOpacity onPress={handleNextPage}
-                    style={{ alignItems: 'center' }}>
+                <TouchableOpacity style={{ alignItems: 'center' }} onPress={handleOrder}>
                     <Icon name="shopping-cart" size={24} color="#000000" />
                     <Text style={{ fontSize: 12 }}>Order</Text>
                 </TouchableOpacity>
@@ -329,3 +339,5 @@ const Home8 = () => {
 };
 
 export default Home8;
+
+

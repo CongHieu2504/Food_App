@@ -1,10 +1,30 @@
-import React from "react";
-import { View, Image, TouchableOpacity , Text} from "react-native";
+import { View, Image, TouchableOpacity , Text, TextInput} from "react-native";
 import { useNavigation } from '@react-navigation/native'; // Import navigation
+import React, {useState, useRoute} from "react"; // Thêm useState vào đây
 
 const Home7 = () => {
 
     const navigation = useNavigation(); // Khởi tạo navigation
+    const [userName, setUserName] = useState(''); // Khởi tạo userName
+    const [password, setPassword] = useState(''); // Khởi tạo password
+    const [reEnterPassword, setReEnterPassword] = useState(''); // Khởi tạo reEnterPassword
+    //Tạo 1 mảng để nhập UserName , Password
+    const users = [
+        {userName : 'admin', password:'admin', reEnterPassword:'admin'},
+    ]
+
+    const handleLogin = () => {
+        const user = users.find((u) => u.userName === userName && u.password === password && u.reEnterPassword === reEnterPassword);
+        if(user)
+        {
+            navigation.navigate('Home8');
+        }
+        else
+        {
+            alert('Sai thông tin đăng nhập');
+        }
+    }
+
     return(
         <View style={{flex:2}}>
             <View style={{
@@ -34,14 +54,18 @@ const Home7 = () => {
                     alignItems: "center", 
                     justifyContent: "center", 
                 }}>
-                    <Text style={{
+                    <TextInput style={{
                         fontSize:14,
                         fontWeight:'400',
-                        color:'#00000080',
                         paddingLeft: 20,
                         textAlign: "left",
                         width: '100%',
-                    }}>Enter Username</Text>
+                    }}
+                        placeholder="Enter UserName"
+                        placeholderTextColor="00000080"
+                        value={userName}
+                        onChangeText={setUserName}
+                    />
                 </View>
             </View>
 
@@ -60,14 +84,18 @@ const Home7 = () => {
                     alignItems: "center", 
                     justifyContent: "center", 
                 }}>
-                    <Text style={{
+                    <TextInput style={{
                         fontSize:14,
                         fontWeight:'400',
-                        color:'#00000080',
                         paddingLeft: 20,
                         textAlign: "left",
-                        width: '100%',
-                    }}>Password</Text>
+                        width: '100%'
+                    }}
+                        placeholder="Password"
+                        placeholderTextColor="00000080"
+                        value={password}
+                        onChangeText={setPassword}
+                    />
                 </View>
             </View>
 
@@ -86,14 +114,18 @@ const Home7 = () => {
                     alignItems: "center", 
                     justifyContent: "center", 
                 }}>
-                    <Text style={{
+                    <TextInput style={{
                         fontSize:14,
                         fontWeight:'400',
-                        color:'#00000080',
                         paddingLeft: 20,
                         textAlign: "left",
                         width: '100%',
-                    }}>Re-enter Password</Text>
+                    }}
+                        placeholder="Re-enter Password"
+                        placeholderTextColor="00000080"
+                        value={reEnterPassword}
+                        onChangeText={setReEnterPassword}
+                    />
                 </View>
             </View>
 
@@ -103,7 +135,7 @@ const Home7 = () => {
                 justifyContent:'center',
                 marginBottom:20, // Thay bottom bằng marginBottom để điều chỉnh khoảng cách
             }}>
-                <TouchableOpacity onPress={() => navigation.navigate('Home8')}
+                <TouchableOpacity onPress={handleLogin}
                 style={{
                     backgroundColor:'#D35400',
                     width:354,
