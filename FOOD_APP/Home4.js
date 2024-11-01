@@ -26,6 +26,7 @@ const Home4 = () => {
         alignItems: 'center', 
         width: 200,
         marginTop: 200,
+        width:'30%',
       }}>
         {/* Nút 1 */}
         <TouchableOpacity onPress={() => navigation.navigate('Home1')}>
@@ -69,7 +70,7 @@ const Home4 = () => {
             width: 10,
             height: 10,
             borderRadius: 5,
-            backgroundColor: 'white',
+            backgroundColor: 'black',
             marginHorizontal: 5, // Tạo khoảng cách giữa các nút
           }}>
           </View>

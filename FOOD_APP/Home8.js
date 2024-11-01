@@ -7,12 +7,23 @@ const Home8 = () => {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
     const [selectedCategory, setSelectedCategory] = useState(null);
+    const navigation = useNavigation();
+
     // API call
     const fetchData = async () => {
         try {
             const response = await fetch("https://6459feb465bd868e930d904a.mockapi.io/users");
             const json = await response.json();
-            setData(json);
+
+            // Gán tạm danh mục để thử nghiệm
+            const categories = ['Drink', 'Food', 'Cake', 'Snack'];
+            const updatedData = json.map((item, index) => ({
+                ...item,
+                category: categories[index % categories.length], // Luân phiên gán danh mục
+            }));
+
+            console.log("Updated Data:", updatedData); // Kiểm tra dữ liệu đã cập nhật
+            setData(updatedData);
             setLoading(false);
         } catch (error) {
             console.error(error);
@@ -20,39 +31,42 @@ const Home8 = () => {
         }
     };
 
+
+
     useEffect(() => {
         fetchData();
     }, []);
 
-// Hàm xử lý khi nhấn "Order"
-const handleOrder = () => {
-    if (selectedImage) {  // Thay selectedCategory bằng selectedImage
-        navigation.navigate('Home9', { category: selectedImage });
-    } else {
-        alert("Please select a category before ordering!");  // Thông báo nếu chưa chọn danh mục
-    }
-};
+    const filteredData = selectedCategory ? data.filter(item => item.category === selectedCategory) : data;
 
+    // Hàm xử lý khi nhấn "Order"
+    const handleOrder = () => {
+        if (selectedCategory) {
+            navigation.navigate('Home9', { category: selectedCategory });
+        } else {
+            alert("Please select a category before ordering!");
+        }
+    };
 
     const renderItem = ({ item }) => {
         return (
             <View>
                 <View style={{ flexDirection: 'row', marginBottom: 10, alignItems: 'center' }}>
-                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image
                             source={require('./img/Group 2.png')}
                             style={{ width: 50, height: 50, marginRight: 10 }}
                         />
                         <Text>Hambuger</Text>
                     </View>
-                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:10,}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 10, }}>
                         <Image
                             source={require('./img/Group 3.png')}
                             style={{ width: 50, height: 50, marginRight: 10 }}
                         />
                         <Text>Pizza</Text>
                     </View>
-                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:20}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 20 }}>
                         <Image
                             source={require('./img/Group 4.png')}
                             style={{ width: 50, height: 50, marginRight: 10 }}
@@ -60,22 +74,22 @@ const handleOrder = () => {
                         <Text>BBQ</Text>
                     </View>
                 </View>
-                <View style={{ flexDirection: 'row', marginBottom: 10, alignItems: 'center'}}>
-                    <View style={{flexDirection:'row', alignItems:'center'}}>
+                <View style={{ flexDirection: 'row', marginBottom: 10, alignItems: 'center' }}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center' }}>
                         <Image
                             source={require('./img/Group 5.png')}
                             style={{ width: 50, height: 50, marginRight: 10 }}
                         />
                         <Text>Fruit</Text>
                     </View>
-                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:50,}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 50, }}>
                         <Image
                             source={require('./img/Group 6.png')}
                             style={{ width: 50, height: 50, marginRight: 10 }}
                         />
                         <Text>Sushi</Text>
                     </View>
-                    <View style={{flexDirection:'row', alignItems:'center', marginLeft:15,}}>
+                    <View style={{ flexDirection: 'row', alignItems: 'center', marginLeft: 15, }}>
                         <Image
                             source={require('./img/Group 7.png')}
                             style={{ width: 50, height: 50, marginRight: 10 }}
@@ -86,9 +100,6 @@ const handleOrder = () => {
             </View>
         );
     };
-
-    const [selectedImage, setSelectedImage] = useState(null);
-    const navigation = useNavigation();
 
     // Header của FlatList
     const renderHeader = () => (
@@ -142,7 +153,7 @@ const handleOrder = () => {
                 marginBottom: 20,
             }}>
                 {/* DRINK */}
-                <TouchableOpacity onPress={() => setSelectedImage('Drink')}>
+                <TouchableOpacity onPress={() => setSelectedCategory('Drink')}>
                     <Image
                         source={require('./img/cup.png')}
                         style={{
@@ -150,8 +161,8 @@ const handleOrder = () => {
                             height: 70,
                             borderRadius: 20,
                             backgroundColor: '#ECF0F1',
-                            borderWidth: selectedImage === 'Drink' ? 3 : 0,  // Hiển thị viền nếu được chọn
-                            borderColor: selectedImage === 'Drink' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                            borderWidth: selectedCategory === 'Drink' ? 3 : 0,
+                            borderColor: selectedCategory === 'Drink' ? '#D35400' : 'transparent',
                         }}
                     />
                     <Text style={{
@@ -168,7 +179,7 @@ const handleOrder = () => {
                 </TouchableOpacity>
 
                 {/* FOOD */}
-                <TouchableOpacity onPress={() => setSelectedImage('Food')}>
+                <TouchableOpacity onPress={() => setSelectedCategory('Food')}>
                     <Image
                         source={require('./img/ham_1.png')}
                         style={{
@@ -176,8 +187,8 @@ const handleOrder = () => {
                             height: 70,
                             borderRadius: 20,
                             backgroundColor: '#ECF0F1',
-                            borderWidth: selectedImage === 'Food' ? 3 : 0,  // Hiển thị viền nếu được chọn
-                            borderColor: selectedImage === 'Food' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                            borderWidth: selectedCategory === 'Food' ? 3 : 0,
+                            borderColor: selectedCategory === 'Food' ? '#D35400' : 'transparent',
                         }}
                     />
                     <Text style={{
@@ -194,15 +205,15 @@ const handleOrder = () => {
                 </TouchableOpacity>
 
                 {/* CAKE */}
-                <TouchableOpacity onPress={() => setSelectedImage('Cake')}>
+                <TouchableOpacity onPress={() => setSelectedCategory('Cake')}>
                     <Image
                         source={require('./img/Cake_.png')}
                         style={{
                             width: 70,
                             height: 70,
                             borderRadius: 20,
-                            borderWidth: selectedImage === 'Cake' ? 3 : 0,  // Hiển thị viền nếu được chọn
-                            borderColor: selectedImage === 'Cake' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                            borderWidth: selectedCategory === 'Cake' ? 3 : 0,
+                            borderColor: selectedCategory === 'Cake' ? '#D35400' : 'transparent',
                         }}
                     />
                     <Text style={{
@@ -219,15 +230,15 @@ const handleOrder = () => {
                 </TouchableOpacity>
 
                 {/* SNACK */}
-                <TouchableOpacity onPress={() => setSelectedImage('Snack')}>
+                <TouchableOpacity onPress={() => setSelectedCategory('Snack')}>
                     <Image
                         source={require('./img/Snack_.png')}
                         style={{
                             width: 70,
                             height: 70,
                             borderRadius: 20,
-                            borderWidth: selectedImage === 'Snack' ? 3 : 0,  // Hiển thị viền nếu được chọn
-                            borderColor: selectedImage === 'Snack' ? '#D35400' : 'transparent',  // Màu viền khi được chọn
+                            borderWidth: selectedCategory === 'Snack' ? 3 : 0,
+                            borderColor: selectedCategory === 'Snack' ? '#D35400' : 'transparent',
                         }}
                     />
                     <Text style={{
@@ -252,11 +263,11 @@ const handleOrder = () => {
                 <Text style={{ textAlign: 'center', marginTop: 20 }}>Loading ...</Text>
             ) : (
                 <FlatList
-                    data={data}
+                    data={filteredData}
                     renderItem={renderItem}
                     keyExtractor={(item) => item.id.toString()}
-                    ListHeaderComponent={renderHeader} // Đặt phần đầu
-                    contentContainerStyle={{ alignItems: 'center', justifyContent: 'space-between' }} // Căn giữa danh sách
+                    ListHeaderComponent={renderHeader}
+                    contentContainerStyle={{ alignItems: 'center' }}
                 />
             )}
 

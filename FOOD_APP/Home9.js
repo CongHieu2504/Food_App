@@ -1,11 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Image, TouchableOpacity, Text, FlatList } from "react-native";
-import Icon from 'react-native-vector-icons/FontAwesome'; // Import the icon library
+import Icon from 'react-native-vector-icons/FontAwesome';
 
 const Home9 = () => {
-
-    // State để lưu sản phẩm đã chọn
     const [selectedProduct, setSelectedProduct] = useState(null);
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(true);
@@ -28,66 +26,59 @@ const Home9 = () => {
         fetchData();
     }, []);
 
-const renderItem = ({ item }) => {
-    const isSelected = selectedProduct && selectedProduct.id === item.id; // Kiểm tra sản phẩm được chọn
+    const renderItem = ({ item }) => {
+        const isSelected = selectedProduct && selectedProduct.id === item.id;
 
-    return (
-        <View>
-        <TouchableOpacity onPress={() => setSelectedProduct(item)} style={{ backgroundColor: isSelected ? '#D35400' : '#FFFFFF', padding: 10 }}>
-            <View style={{
-                alignItems: 'center',
-                marginBottom: 20,
-                flexDirection: 'row',
-                justifyContent: 'space-between',
-                width: '90%',
-                marginHorizontal: 20,
-            }}>
-                <Image source={require('./img/reviewrice.png')} style={{ width: 100, height: 100 }} />
-                <View style={{ marginHorizontal: 20 }}>
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: '700',
-                        marginVertical: 10,
-                    }}>Dogmie jagong tutung</Text>
+        return (
+            <TouchableOpacity onPress={() => setSelectedProduct(item)} style={{ backgroundColor: isSelected ? '#D35400' : '#FFFFFF', padding: 10 }}>
+                <View style={{
+                    alignItems: 'center',
+                    marginBottom: 20,
+                    flexDirection: 'row',
+                    justifyContent: 'space-between',
+                    width: '90%',
+                    marginHorizontal: 20,
+                }}>
+                    <Image source={require('./img/reviewrice.png')} style={{ width: 100, height: 100 }} />
+                    <View style={{ marginHorizontal: 20 }}>
+                        <Text style={{
+                            fontSize: 16,
+                            fontWeight: '700',
+                            marginVertical: 10,
+                        }}>{item.title}</Text>
 
-                    <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '60%', marginVertical: 10 }}>
-                        <TouchableOpacity>
-                            <Image source={require('./img/like4.png')} />
-                        </TouchableOpacity>
-                        <Text>999+</Text>
-                        <Text>|</Text>
-                        <TouchableOpacity>
-                            <Image source={require('./img/like3.png')} />
-                        </TouchableOpacity>
-                        <Text>93+</Text>
+                        <View style={{ flexDirection: 'row', justifyContent: 'space-around', width: '60%', marginVertical: 10 }}>
+                            <TouchableOpacity>
+                                <Image source={require('./img/like4.png')} />
+                            </TouchableOpacity>
+                            <Text>999+</Text>
+                            <Text>|</Text>
+                            <TouchableOpacity>
+                                <Image source={require('./img/like3.png')} />
+                            </TouchableOpacity>
+                            <Text>93+</Text>
+                        </View>
+                        <Text style={{
+                            fontSize: 16,
+                            fontWeight: '700',
+                            color: 'green',
+                        }}>$99.99</Text>
                     </View>
-                    <Text style={{
-                        fontSize: 16,
-                        fontWeight: '700',
-                        color: 'green',
-                    }}>$99.99</Text>
                 </View>
-            </View>
-        </TouchableOpacity>
-
-        </View>
-    );
-};
-
+            </TouchableOpacity>
+        );
+    };
 
     const handleSend = () => {
         if (selectedProduct) {
-            navigation.navigate('Home10'); // Điều hướng nếu có sản phẩm được chọn
+            navigation.navigate('Home10');
         } else {
             alert('Vui lòng chọn sản phẩm trước khi tiếp tục!');
         }
     };
 
     return (
-        <View style={{
-            flex: 3,
-            backgroundColor: '#FFFFFF'
-        }}>
+        <View style={{ flex: 3, backgroundColor: '#FFFFFF' }}>
             <View style={{
                 alignItems: 'center',
                 justifyContent: 'center',
@@ -96,7 +87,7 @@ const renderItem = ({ item }) => {
                 left: 100,
                 marginTop: 5,
             }}>
-                <Text style={{ fontSize: 24, fontWeight: 700 }}>Review Food</Text>
+                <Text style={{ fontSize: 24, fontWeight: '700' }}>Review Food</Text>
             </View>
 
             <View style={{ flex: 1 }}>
@@ -104,7 +95,7 @@ const renderItem = ({ item }) => {
                     <Text>Loading ...</Text>
                 ) : (
                     <FlatList
-                        data={data}// Hiển thị toàn bộ danh sách
+                        data={data.slice(0, 2)} // Hiển thị 2 sản phẩm đầu tiên
                         renderItem={renderItem}
                         keyExtractor={(item) => item.id.toString()}
                     />
@@ -116,7 +107,7 @@ const renderItem = ({ item }) => {
                 justifyContent: 'center',
                 marginBottom: 100,
             }}>
-                <TouchableOpacity onPress={handleSend} // Gọi hàm handleSend khi nhấn nút
+                <TouchableOpacity onPress={handleSend}
                     style={{
                         backgroundColor: '#D35400',
                         width: 354,
@@ -164,7 +155,6 @@ const renderItem = ({ item }) => {
                     <Text style={{ fontSize: 12 }}>Profile</Text>
                 </TouchableOpacity>
             </View>
-
         </View>
     )
 };

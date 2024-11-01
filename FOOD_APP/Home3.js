@@ -54,7 +54,7 @@ const Home3 = () => {
             width: 10,
             height: 10,
             borderRadius: 5,
-            backgroundColor: 'white',
+            backgroundColor: 'black',
           }}>
           </View>
         </TouchableOpacity>
