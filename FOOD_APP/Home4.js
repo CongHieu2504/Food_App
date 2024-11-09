@@ -22,11 +22,11 @@ const Home4 = () => {
       {/* Tạo nút điều hướng */}
       <View style={{
         flexDirection: 'row',
-        justifyContent: 'space-around', 
+        justifyContent: 'space-between', 
         alignItems: 'center', 
         width: 200,
         marginTop: 200,
-        width:'30%',
+        width:'33%',
       }}>
         {/* Nút 1 */}
         <TouchableOpacity onPress={() => navigation.navigate('Home1')}>
@@ -87,7 +87,6 @@ const Home4 = () => {
             borderTopColor: 'transparent',
             borderBottomColor: 'transparent',
             borderLeftColor: 'white',
-            marginLeft: 15, // Tạo khoảng cách với nút tròn
           }}>
           </View>
         </TouchableOpacity>
