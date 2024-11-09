@@ -16,6 +16,7 @@ import Home12 from "./Home12";
 import Home13 from "./Home13";
 import Home14 from "./Home14";
 import Home15 from "./Home15";
+import Home16 from "./Home16";
 const Stack = createNativeStackNavigator();
 
 export default function YourApp () {
@@ -37,6 +38,7 @@ export default function YourApp () {
         <Stack.Screen name="Home13" component={Home13}/>
         <Stack.Screen name="Home14" component={Home14}/>
         <Stack.Screen name="Home15" component={Home15}/>
+        <Stack.Screen name="Home16" component={Home16}/>
       </Stack.Navigator>
     </NavigationContainer>
   )
